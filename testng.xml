@@ -1,0 +1,10 @@
+<suite name="Test Suite">
+    <test name="Test Class">
+        <classes>
+            <class name="BaseTest"/>
+            <class name="UserDataFormTest"/>
+            <class name="AdminDataFormTest"/>
+            <class name="AdminTableTest"/>
+        </classes>
+    </test>
+</suite>
