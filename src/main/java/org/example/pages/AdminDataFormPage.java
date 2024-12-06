@@ -1,6 +1,6 @@
 package org.example.pages;
 
-import org.example.utils.RegistrationDataVO;
+import org.example.utils.AdminRegistrationDataVO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,7 +30,7 @@ public class AdminDataFormPage {
         this.driver = driver;
     }
 
-    public void fillRegistrationAdminForm(RegistrationDataVO registrationData) {
+    public void fillRegistrationAdminForm(AdminRegistrationDataVO registrationData) {
         adminLastNameField.sendKeys(registrationData.getAdminLastName());
         adminFirstNameField.sendKeys(registrationData.getAdminFirstName());
         adminMiddleNameField.sendKeys(registrationData.getAdminMiddleName());
@@ -39,6 +39,7 @@ public class AdminDataFormPage {
         adminDoBField.sendKeys(registrationData.getAdminDoB());
         nextButton.click();
     }
+
     public String resultOfSendingRequest() {
         return driver.findElement(By.xpath("//*/b[text()='Aдминистратор']")).getText();
     }

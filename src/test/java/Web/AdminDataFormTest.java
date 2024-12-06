@@ -1,9 +1,14 @@
+package Web;
+
+import org.example.data.RegistrationAdminDataProvider;
 import org.example.pages.AdminDataFormPage;
 import org.example.pages.RoleSelectPage;
-import org.example.utils.RegistrationDataVO;
+import org.example.utils.AdminRegistrationDataVO;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.example.utils.Constants.FORM_NOT_SUBMITTED_MESSAGE;
 
 public class AdminDataFormTest extends BaseTest {
     private RoleSelectPage roleSelectPage;
@@ -14,18 +19,16 @@ public class AdminDataFormTest extends BaseTest {
         roleSelectPage = new RoleSelectPage(driver);
         adminDataFormPage = new AdminDataFormPage(driver);
         roleSelectPage.clickAdminButton();
+
     }
 
     @Test
     public void testAdminFormSending() {
-        RegistrationDataVO registrationData = new RegistrationDataVO(
-                "Jhony", "Marts", "Keynov",
-                "375333334455", "MP1234567", "15-12-2000"
-        );
+        AdminRegistrationDataVO registrationData = RegistrationAdminDataProvider.getAdminRegistrationData();
         adminDataFormPage.fillRegistrationAdminForm(registrationData);
 
         String resultOfSendingText = adminDataFormPage.resultOfSendingRequest();
-        Assert.assertTrue(resultOfSendingText.contains("Aдминистратор"), "Форма не отправлена");
+        Assert.assertTrue(resultOfSendingText.contains("Aдминистратор"), FORM_NOT_SUBMITTED_MESSAGE);
 
     }
 

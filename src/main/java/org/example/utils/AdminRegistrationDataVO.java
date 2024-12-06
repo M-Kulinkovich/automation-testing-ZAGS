@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RegistrationDataVO {
+public class AdminRegistrationDataVO {
     private String adminLastName;
     private String adminFirstName;
     private String adminMiddleName;

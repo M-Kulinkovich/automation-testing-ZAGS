@@ -1,10 +1,15 @@
+package Web;
+
+import org.example.data.RegistrationAdminDataProvider;
 import org.example.pages.AdminDataFormPage;
 import org.example.pages.AdminTablePage;
 import org.example.pages.RoleSelectPage;
-import org.example.utils.RegistrationDataVO;
+import org.example.utils.AdminRegistrationDataVO;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.example.utils.Constants.*;
 
 public class AdminTableTest extends BaseTest {
     private AdminTablePage adminTablePage;
@@ -18,10 +23,7 @@ public class AdminTableTest extends BaseTest {
         adminTablePage = new AdminTablePage(driver);
 
         roleSelectPage.clickAdminButton();
-        RegistrationDataVO registrationData = new RegistrationDataVO(
-                "Jhony", "Marts", "Keynov",
-                "375333334455", "MP1234567", "15-12-2000 "
-        );
+        AdminRegistrationDataVO registrationData = RegistrationAdminDataProvider.getAdminRegistrationData();
         adminDataFormPage.fillRegistrationAdminForm(registrationData);
     }
 
@@ -33,7 +35,7 @@ public class AdminTableTest extends BaseTest {
 
         adminTablePage.clickApproveButton(rowIndex);
         String newStatus = adminTablePage.getStatus(3);
-        Assert.assertEquals(newStatus, "Одобрена", "Статус должен быть 'Одобрена'.");
+        Assert.assertEquals(newStatus, APPROVE_REQUEST_TEXT, APPROVE_STATUS_MESSAGE);
     }
     @Test
     void testAdminTableChangeStatusToReject() {
@@ -42,6 +44,6 @@ public class AdminTableTest extends BaseTest {
 
         adminTablePage.clickRejectButton(rowIndex);
         String newStatus = adminTablePage.getStatus(1);
-        Assert.assertEquals(newStatus, "Отклонена", "Статус должен быть 'Одобрена'.");
+        Assert.assertEquals(newStatus, REJECT_REQUEST_TEXT, REJECT_STATUS_MESSAGE);
     }
 }

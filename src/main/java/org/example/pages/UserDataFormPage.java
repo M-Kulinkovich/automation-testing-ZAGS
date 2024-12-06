@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.example.utils.UserRegistrationDataVO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -79,15 +80,13 @@ public class UserDataFormPage {
         this.driver = driver;
     }
 
-    public void fillApplicantDetails(String lastName, String firstName,
-                                     String middleName, String phoneNumber,
-                                     String passportNumber, String address) {
-        lastNameField.sendKeys(lastName);
-        firstNameField.sendKeys(firstName);
-        middleNameField.sendKeys(middleName);
-        phoneNumberField.sendKeys(phoneNumber);
-        passportNumberField.sendKeys(passportNumber);
-        addressField.sendKeys(address);
+    public void fillApplicantDetails(UserRegistrationDataVO.ApplicantData applicantData) {
+        lastNameField.sendKeys(applicantData.getLastName());
+        firstNameField.sendKeys(applicantData.getFirstName());
+        middleNameField.sendKeys(applicantData.getMiddleName());
+        phoneNumberField.sendKeys(applicantData.getPhoneNumber());
+        passportNumberField.sendKeys(applicantData.getPassportNumber());
+        addressField.sendKeys(applicantData.getAddress());
         nextButton.click();
     }
 
@@ -103,42 +102,37 @@ public class UserDataFormPage {
         deathSelectButton.click();
     }
 
-    public void fillCitizenDate(String citizenLastName, String citizenFirstName,
-                                String citizenMiddleName, String citizenDoB,
-                                String citizenPassportNumber, String citizenSex) {
-        citizenLastNameField.sendKeys(citizenLastName);
-        citizenFirstNameField.sendKeys(citizenFirstName);
-        citizenMiddleNameField.sendKeys(citizenMiddleName);
-        citizenDateOfBirthField.sendKeys(citizenDoB);
-        citizenPassportNumberField.sendKeys(citizenPassportNumber);
-        citizenSexField.sendKeys(citizenSex);
+    public void fillCitizenDate(UserRegistrationDataVO.CitizenData citizenData) {
+        citizenLastNameField.sendKeys(citizenData.getCitizenLastName());
+        citizenFirstNameField.sendKeys(citizenData.getCitizenFirstName());
+        citizenMiddleNameField.sendKeys(citizenData.getCitizenMiddleName());
+        citizenDateOfBirthField.sendKeys(citizenData.getCitizenDoB());
+        citizenPassportNumberField.sendKeys(citizenData.getCitizenPassportNumber());
+        citizenSexField.sendKeys(citizenData.getCitizenSex());
         nextButton.click();
     }
 
-    public void fillBirthdayServiceForm(String placeOfBirth, String motherName, String fatherName) {
-        placeOfBirthField.sendKeys(placeOfBirth);
-        motherNameField.sendKeys(motherName);
-        fatherNameField.sendKeys(fatherName);
+    public void fillBirthdayServiceForm(UserRegistrationDataVO.ServiceData birthServiceData) {
+        placeOfBirthField.sendKeys(birthServiceData.getPlaceOfBirth());
+        motherNameField.sendKeys(birthServiceData.getMotherName());
+        fatherNameField.sendKeys(birthServiceData.getFatherName());
         finishButton.click();
     }
 
-    public void fillDeathServiceForm(String deathDate, String placeOfDeath) {
-        placeOfDeathField.sendKeys(placeOfDeath);
-        dateOfDeathField.sendKeys(deathDate);
+    public void fillDeathServiceForm(UserRegistrationDataVO.ServiceData deathServiceData) {
+        placeOfDeathField.sendKeys(deathServiceData.getPlaceOfDeath());
+        dateOfDeathField.sendKeys(deathServiceData.getDeathDate());
         finishButton.click();
     }
 
-    public void fillMarriageServiceForm(String registrationDate, String spouseLastName,
-                                        String newLastName, String spouseFirstName,
-                                        String spouseMiddleName, String spouseDateOfBirth,
-                                        String spousePassportNumber) {
-        registrationDateField.sendKeys(registrationDate);
-        newLastNameField.sendKeys(newLastName);
-        spouseLastNameField.sendKeys(spouseLastName);
-        spouseFirstNameField.sendKeys(spouseFirstName);
-        spouseMiddleNameField.sendKeys(spouseMiddleName);
-        spousePassportNumberField.sendKeys(spousePassportNumber);
-        spouseDateOfBirthField.sendKeys(spouseDateOfBirth);
+    public void fillMarriageServiceForm(UserRegistrationDataVO.ServiceData marrigeService) {
+        registrationDateField.sendKeys(marrigeService.getRegistrationDate());
+        newLastNameField.sendKeys(marrigeService.getNewLastName());
+        spouseLastNameField.sendKeys(marrigeService.getSpouseLastName());
+        spouseFirstNameField.sendKeys(marrigeService.getSpouseFirstName());
+        spouseMiddleNameField.sendKeys(marrigeService.getSpouseMiddleName());
+        spousePassportNumberField.sendKeys(marrigeService.getSpousePassportNumber());
+        spouseDateOfBirthField.sendKeys(marrigeService.getSpouseDateOfBirth());
         finishButton.click();
     }
 
