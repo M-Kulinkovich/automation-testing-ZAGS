@@ -1,10 +1,9 @@
 package Web;
 
-import org.example.data.RegistrationAdminDataProvider;
+import io.qameta.allure.Description;
 import org.example.data.RegistrationUserDataProvider;
 import org.example.pages.RoleSelectPage;
 import org.example.pages.UserDataFormPage;
-import org.example.utils.AdminRegistrationDataVO;
 import org.example.utils.UserRegistrationDataVO;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -29,44 +28,77 @@ public class UserDataFormTest extends BaseTest {
     UserRegistrationDataVO.CitizenData citizenData = RegistrationUserDataProvider.getCitizenData();
 
     @Test
+    @Description ("Проверка регистрации брака")
     public void testUserMarriageService() {
-        UserRegistrationDataVO.ServiceData marriageData = RegistrationUserDataProvider.getMarriageServiceData();
+        Weblogger.info("Starting test: testUserMarriageService");
 
-        userDataFormPage.fillApplicantDetails(applicantData);
-        userDataFormPage.selectMarriageService();
-        userDataFormPage.fillCitizenDate(citizenData);
-        userDataFormPage.fillMarriageServiceForm(marriageData);
+        try {
+            UserRegistrationDataVO.ServiceData marriageData = RegistrationUserDataProvider.getMarriageServiceData();
 
-        String resultText = userDataFormPage.resultOfSendingRequest();
-        Assert.assertTrue(resultText.contains(APPLICATION_SENDING_INFO), FORM_NOT_SUBMITTED_MESSAGE);
+            userDataFormPage.fillApplicantDetails(applicantData);
+            userDataFormPage.selectMarriageService();
+            userDataFormPage.fillCitizenDate(citizenData);
+            userDataFormPage.fillMarriageServiceForm(marriageData);
+
+            String resultText = userDataFormPage.resultOfSendingRequest();
+            Assert.assertTrue(resultText.contains(APPLICATION_SENDING_INFO), FORM_NOT_SUBMITTED_MESSAGE);
+        } catch (Exception e) {
+            Weblogger.error("testUserMarriageService failed: " + e.getMessage());
+            throw e;
+
+        } finally {
+            Weblogger.info("testUserMarriageService completed");
+        }
 
     }
 
     @Test
+    @Description ("Проверка регистрации смерти")
     public void testUserDeathService() {
-        UserRegistrationDataVO.ServiceData deathData = RegistrationUserDataProvider.getDeathServiceData();
+        Weblogger.info("Starting test: testUserDeathService");
 
-        userDataFormPage.fillApplicantDetails(applicantData);
-        userDataFormPage.selectDeathService();
-        userDataFormPage.fillCitizenDate(citizenData);
-        userDataFormPage.fillDeathServiceForm(deathData);
+        try {
+            UserRegistrationDataVO.ServiceData deathData = RegistrationUserDataProvider.getDeathServiceData();
 
-        String resultText = userDataFormPage.resultOfSendingRequest();
-        Assert.assertTrue(resultText.contains(APPLICATION_SENDING_INFO), FORM_NOT_SUBMITTED_MESSAGE);
+            userDataFormPage.fillApplicantDetails(applicantData);
+            userDataFormPage.selectDeathService();
+            userDataFormPage.fillCitizenDate(citizenData);
+            userDataFormPage.fillDeathServiceForm(deathData);
+
+            String resultText = userDataFormPage.resultOfSendingRequest();
+            Assert.assertTrue(resultText.contains(APPLICATION_SENDING_INFO), FORM_NOT_SUBMITTED_MESSAGE);
+        } catch (Exception e) {
+            Weblogger.error("testUserDeathService failed: " + e.getMessage());
+            throw e;
+
+        } finally {
+            Weblogger.info("testUserDeathService completed");
+        }
 
     }
 
     @Test
+    @Description ("Проверка регистрации рождения")
     public void testUserBirthService() {
-        UserRegistrationDataVO.ServiceData birthdayDaya = RegistrationUserDataProvider.getBirthdayServiceData();
+        Weblogger.info("Starting test: testUserBirthService");
 
-        userDataFormPage.fillApplicantDetails(applicantData);
-        userDataFormPage.selectBirthdayService();
-        userDataFormPage.fillCitizenDate(citizenData);
-        userDataFormPage.fillBirthdayServiceForm(birthdayDaya);
+        try {
+            UserRegistrationDataVO.ServiceData birthdayDaya = RegistrationUserDataProvider.getBirthdayServiceData();
 
-        String resultText = userDataFormPage.resultOfSendingRequest();
-        Assert.assertTrue(resultText.contains(APPLICATION_SENDING_INFO), FORM_NOT_SUBMITTED_MESSAGE);
+            userDataFormPage.fillApplicantDetails(applicantData);
+            userDataFormPage.selectBirthdayService();
+            userDataFormPage.fillCitizenDate(citizenData);
+            userDataFormPage.fillBirthdayServiceForm(birthdayDaya);
+
+            String resultText = userDataFormPage.resultOfSendingRequest();
+            Assert.assertTrue(resultText.contains(APPLICATION_SENDING_INFO), FORM_NOT_SUBMITTED_MESSAGE);
+        } catch (Exception e) {
+            Weblogger.error("testUserBirthService failed: " + e.getMessage());
+            throw e;
+
+        } finally {
+            Weblogger.info("testUserBirthService completed");
+        }
 
     }
 }

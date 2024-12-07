@@ -1,5 +1,6 @@
 package Web;
 
+import io.qameta.allure.Description;
 import org.example.data.RegistrationAdminDataProvider;
 import org.example.pages.AdminDataFormPage;
 import org.example.pages.RoleSelectPage;
@@ -23,13 +24,22 @@ public class AdminDataFormTest extends BaseTest {
     }
 
     @Test
+    @Description ("Заполнение формы регистрации для админа")
     public void testAdminFormSending() {
-        AdminRegistrationDataVO registrationData = RegistrationAdminDataProvider.getAdminRegistrationData();
-        adminDataFormPage.fillRegistrationAdminForm(registrationData);
+        Weblogger.info("Starting test: testAdminFormSending");
+        try {
+            AdminRegistrationDataVO registrationData = RegistrationAdminDataProvider.getAdminRegistrationData();
+            adminDataFormPage.fillRegistrationAdminForm(registrationData);
 
-        String resultOfSendingText = adminDataFormPage.resultOfSendingRequest();
-        Assert.assertTrue(resultOfSendingText.contains("Aдминистратор"), FORM_NOT_SUBMITTED_MESSAGE);
+            String resultOfSendingText = adminDataFormPage.resultOfSendingRequest();
+            Assert.assertTrue(resultOfSendingText.contains("Aдминистратор"), FORM_NOT_SUBMITTED_MESSAGE);
+        } catch (Exception e) {
+            Weblogger.error("testAdminFormSending failed: " + e.getMessage());
+            throw e;
 
+        } finally {
+            Weblogger.info("testAdminFormSending completed");
+        }
     }
 
 }

@@ -1,5 +1,8 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.utils.AdminRegistrationDataVO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AdminDataFormPage {
     protected WebDriver driver;
+    private static final Logger logger = LogManager.getLogger(AdminDataFormPage.class);
 
     @FindBy (id = "TextInputField-1")
     private WebElement adminLastNameField;
@@ -30,7 +34,10 @@ public class AdminDataFormPage {
         this.driver = driver;
     }
 
+    @Step ("Заполнение формы администратора данными")
     public void fillRegistrationAdminForm(AdminRegistrationDataVO registrationData) {
+        logger.info("Filling data to admin form");
+
         adminLastNameField.sendKeys(registrationData.getAdminLastName());
         adminFirstNameField.sendKeys(registrationData.getAdminFirstName());
         adminMiddleNameField.sendKeys(registrationData.getAdminMiddleName());

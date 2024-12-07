@@ -1,5 +1,8 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.utils.UserRegistrationDataVO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class UserDataFormPage {
     protected WebDriver driver;
+    private static final Logger logger = LogManager.getLogger(UserDataFormPage.class);
 
     @FindBy (id = "TextInputField-1")
     private WebElement lastNameField;
@@ -80,7 +84,10 @@ public class UserDataFormPage {
         this.driver = driver;
     }
 
+    @Step ("Заполнение данных заявителя")
     public void fillApplicantDetails(UserRegistrationDataVO.ApplicantData applicantData) {
+        logger.info("Filling data to applicants form");
+
         lastNameField.sendKeys(applicantData.getLastName());
         firstNameField.sendKeys(applicantData.getFirstName());
         middleNameField.sendKeys(applicantData.getMiddleName());
@@ -90,19 +97,29 @@ public class UserDataFormPage {
         nextButton.click();
     }
 
+    @Step ("Выбор услуги 'регистрация рождения' ")
     public void selectBirthdayService() {
+        logger.info("select birthday service");
+
         birthdaySelectButton.click();
     }
-
+    @Step ("Выбор услуги 'регистрация брака' ")
     public void selectMarriageService() {
+        logger.info("select marriage service");
+
         marriageSelectButton.click();
     }
-
+    @Step ("Выбор услуги 'регистрация смерти' ")
     public void selectDeathService() {
+        logger.info("select death service");
+
         deathSelectButton.click();
     }
 
+    @Step ("Заполнение данных гражданина")
     public void fillCitizenDate(UserRegistrationDataVO.CitizenData citizenData) {
+        logger.info("Filling data to citizen form");
+
         citizenLastNameField.sendKeys(citizenData.getCitizenLastName());
         citizenFirstNameField.sendKeys(citizenData.getCitizenFirstName());
         citizenMiddleNameField.sendKeys(citizenData.getCitizenMiddleName());
@@ -112,20 +129,28 @@ public class UserDataFormPage {
         nextButton.click();
     }
 
+    @Step ("Заполнение данных о рождении")
     public void fillBirthdayServiceForm(UserRegistrationDataVO.ServiceData birthServiceData) {
+        logger.info("Filling data to birthday form");
+
         placeOfBirthField.sendKeys(birthServiceData.getPlaceOfBirth());
         motherNameField.sendKeys(birthServiceData.getMotherName());
         fatherNameField.sendKeys(birthServiceData.getFatherName());
         finishButton.click();
     }
-
+    @Step ("Заполнение данных о смерти")
     public void fillDeathServiceForm(UserRegistrationDataVO.ServiceData deathServiceData) {
+        logger.info("Filling data to death form");
+
         placeOfDeathField.sendKeys(deathServiceData.getPlaceOfDeath());
         dateOfDeathField.sendKeys(deathServiceData.getDeathDate());
         finishButton.click();
     }
 
+    @Step ("Заполнение данных о браке")
     public void fillMarriageServiceForm(UserRegistrationDataVO.ServiceData marrigeService) {
+        logger.info("Filling data to marriage form");
+
         registrationDateField.sendKeys(marrigeService.getRegistrationDate());
         newLastNameField.sendKeys(marrigeService.getNewLastName());
         spouseLastNameField.sendKeys(marrigeService.getSpouseLastName());
