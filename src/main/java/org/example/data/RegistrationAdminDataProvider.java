@@ -1,7 +1,5 @@
 package org.example.data;
 
-import org.example.utils.AdminRegistrationDataVO;
-
 public class RegistrationAdminDataProvider {
 
     public static AdminRegistrationDataVO getAdminRegistrationData() {

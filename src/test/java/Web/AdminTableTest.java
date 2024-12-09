@@ -5,7 +5,7 @@ import org.example.data.RegistrationAdminDataProvider;
 import org.example.pages.AdminDataFormPage;
 import org.example.pages.AdminTablePage;
 import org.example.pages.RoleSelectPage;
-import org.example.utils.AdminRegistrationDataVO;
+import org.example.data.AdminRegistrationDataVO;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -35,20 +35,12 @@ public class AdminTableTest extends BaseTest {
     void testAdminTableChangeStatusToApprove() {
         Weblogger.info("Starting test: testAdminTableChangeStatusToApprove");
 
-        try {
-            int rowIndex = 3;
-            String currentStatus = adminTablePage.getStatus(3);
+        int rowIndex = 3;
+        String currentStatus = adminTablePage.getStatus(3);
 
-            adminTablePage.clickApproveButton(rowIndex);
-            String newStatus = adminTablePage.getStatus(3);
-            Assert.assertEquals(newStatus, APPROVE_REQUEST_TEXT, APPROVE_STATUS_MESSAGE);
-        } catch (Exception e) {
-            Weblogger.error("testAdminTableChangeStatusToApprove failed: " + e.getMessage());
-            throw e;
-
-        } finally {
-            Weblogger.info("testAdminTableChangeStatusToApprove completed");
-        }
+        adminTablePage.clickApproveButton(rowIndex);
+        String newStatus = adminTablePage.getStatus(3);
+        Assert.assertEquals(newStatus, APPROVE_REQUEST_TEXT, APPROVE_STATUS_MESSAGE);
     }
 
     @Test
@@ -56,19 +48,12 @@ public class AdminTableTest extends BaseTest {
     void testAdminTableChangeStatusToReject() {
         Weblogger.info("Starting test: testAdminTableChangeStatusToReject");
 
-        try {
-            int rowIndex = 1;
-            String currentStatus = adminTablePage.getStatus(1);
+        int rowIndex = 1;
+        String currentStatus = adminTablePage.getStatus(1);
 
-            adminTablePage.clickRejectButton(rowIndex);
-            String newStatus = adminTablePage.getStatus(1);
-            Assert.assertEquals(newStatus, REJECT_REQUEST_TEXT, REJECT_STATUS_MESSAGE);
-        } catch (Exception e) {
-            Weblogger.error("testAdminTableChangeStatusToReject failed: " + e.getMessage());
-            throw e;
+        adminTablePage.clickRejectButton(rowIndex);
+        String newStatus = adminTablePage.getStatus(1);
+        Assert.assertEquals(newStatus, REJECT_REQUEST_TEXT, REJECT_STATUS_MESSAGE);
 
-        } finally {
-            Weblogger.info("testAdminTableChangeStatusToReject completed");
-        }
     }
 }

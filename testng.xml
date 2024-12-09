@@ -1,4 +1,7 @@
 <suite name="Test Suite">
+    <listeners>
+        <listener class-name="utils.TestListener" />
+    </listeners>
     <test name="Test Class">
         <classes>
             <class name="Web.BaseTest"/>

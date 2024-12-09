@@ -3,7 +3,7 @@ package org.example.pages;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.utils.AdminRegistrationDataVO;
+import org.example.data.AdminRegistrationDataVO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +34,7 @@ public class AdminDataFormPage {
         this.driver = driver;
     }
 
-    @Step ("Заполнение формы администратора данными")
+    @Step ("Заполнение формы администратора данными ")
     public void fillRegistrationAdminForm(AdminRegistrationDataVO registrationData) {
         logger.info("Filling data to admin form");
 

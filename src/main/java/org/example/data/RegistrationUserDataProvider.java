@@ -1,7 +1,5 @@
 package org.example.data;
 
-import org.example.utils.UserRegistrationDataVO;
-
 public class RegistrationUserDataProvider {
     public static UserRegistrationDataVO.ApplicantData getApplicantData() {
         return new UserRegistrationDataVO.ApplicantData("Doe", "John",
