@@ -1,6 +1,6 @@
-package org.example.data;
+package org.example.dataProviders.WEB;
 
-import org.example.utils.AdminRegistrationDataVO;
+import org.example.models.WEB.AdminRegistrationDataVO;
 
 public class RegistrationAdminDataProvider {
 

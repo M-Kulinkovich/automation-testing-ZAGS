@@ -1,5 +1,16 @@
 <suite name="Test Suite">
-    <test name="Test Class">
+    <test name="API tests">
+        <classes>
+            <class name="API.BaseTest"/>
+            <class name="API.UserApiTest"/>
+            <class name="API.AdminApiTest"/>
+            <class name="API.ApplicationApiTest"/>
+        </classes>
+    </test>
+    <test name="Web tests">
+        <listeners>
+            <listener class-name="testUtils.TestListener"/>
+        </listeners>
         <classes>
             <class name="Web.BaseTest"/>
             <class name="Web.UserDataFormTest"/>

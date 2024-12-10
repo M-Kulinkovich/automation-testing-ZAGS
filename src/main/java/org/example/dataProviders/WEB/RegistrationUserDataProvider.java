@@ -1,6 +1,6 @@
-package org.example.data;
+package org.example.dataProviders.WEB;
 
-import org.example.utils.UserRegistrationDataVO;
+import org.example.models.WEB.UserRegistrationDataVO;
 
 public class RegistrationUserDataProvider {
     public static UserRegistrationDataVO.ApplicantData getApplicantData() {

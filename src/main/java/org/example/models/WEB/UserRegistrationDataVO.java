@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.example.models.WEB;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
