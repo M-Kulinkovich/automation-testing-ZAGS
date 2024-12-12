@@ -1,40 +1,71 @@
 package API;
 
 import io.qameta.allure.Description;
+import io.restassured.response.ValidatableResponse;
 import org.example.dataProviders.API.AdminRegistrationProvider;
 import org.example.dataProviders.API.RequestChangeStatusProvider;
 import org.example.models.API.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 import static io.restassured.RestAssured.given;
+import static org.example.utils.AdminDBUtils.checkCreatingAdminInDB;
 
 public class AdminApiTest extends BaseTest {
+    private AdminSuccessRegistration adminSuccessRegistration;
+    private SuccessChangeStatus successChangeStatus;
+
 
     @Test
     @Description ("Отправка валидных данных для регистрации Admin")
-    public void testRegisterAdmin() {
+    public void testRegisterAdmin() throws Exception {
+        APIlogger.info("Sending POST request to registration Admin");
+
         AdminRegistrationRequest testAdmin = AdminRegistrationProvider.getTestAdminData();
-        AdminSuccessRegistration adminSuccessRegistration = given()
+        ValidatableResponse response = given()
                 .body(testAdmin)
                 .when()
                 .post("sendAdminRequest")
-                .then().log().all()
-                .extract().jsonPath().getObject("data", AdminSuccessRegistration.class);
+                .then().log().all();
+        adminSuccessRegistration = response.extract().jsonPath().getObject("data", AdminSuccessRegistration.class);
+
+        String ApiResponse = response.extract().asPrettyString();
+        APIlogger.info("Response: " + ApiResponse);
 
         Assert.assertNotNull(adminSuccessRegistration.getStaffid());
+
+        //check creation admin in DB
+        AdminRegistrationRequest actualAdmin = checkCreatingAdminInDB(adminSuccessRegistration.getStaffid());
+        APIlogger.info("comparison data sent to API and database");
+        Assert.assertEquals(actualAdmin.getPersonalFirstName(), testAdmin.getPersonalFirstName()
+                , "First name mismatch");
+        Assert.assertEquals(actualAdmin.getPersonalLastName(), testAdmin.getPersonalLastName(),
+                "Last name mismatch");
+        Assert.assertEquals(actualAdmin.getPersonalMiddleName(), testAdmin.getPersonalMiddleName(),
+                "Middle name mismatch");
+        Assert.assertEquals(actualAdmin.getPersonalNumberOfPassport(), testAdmin.getPersonalNumberOfPassport(),
+                "Passport number mismatch");
+        Assert.assertEquals(actualAdmin.getPersonalPhoneNumber(), testAdmin.getPersonalPhoneNumber(),
+                "Phone number mismatch");
+
     }
 
     @Test
     @Description ("Отправка данных для изменения статуса заявки")
     public void testRequestToChangeStatus() {
+        APIlogger.info("Sending POST request to change applications status");
+
         ChangeStatusRequest statusRequest = RequestChangeStatusProvider.changeStatus();
-        SuccessChangeStatus successChangeStatus = given()
+        ValidatableResponse response = given()
                 .body(statusRequest)
                 .when()
                 .post("requestProcess")
-                .then().log().all()
-                .extract().jsonPath().getObject("data", SuccessChangeStatus.class);
+                .then().log().all();
+        successChangeStatus = response.extract().jsonPath().getObject("data", SuccessChangeStatus.class);
+
+        String ApiResponse = response.extract().asPrettyString();
+        APIlogger.info("Response: " + ApiResponse);
 
         Assert.assertNotNull(successChangeStatus.getApplicationid());
         Assert.assertNotNull(successChangeStatus.getStaffid());

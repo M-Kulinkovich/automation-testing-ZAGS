@@ -28,7 +28,7 @@ public abstract class BaseTest {
     @AfterMethod
     public void tearDown() {
         DriverSingleton.quitDriver();
-        Weblogger.info("test completed \n ------------------------------------------------------------------");
+        Weblogger.info("WEB test completed \n ------------------------------------------------------------------");
 
     }
 }

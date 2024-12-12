@@ -10,6 +10,7 @@ public class UserRegistrationRequest {
 
     private String mode;
     private String personalLastName;
+    private String personalFirstName;
     private String personalMiddleName;
     private String personalPhoneNumber;
     private String personalNumberOfPassport;
@@ -31,5 +32,6 @@ public class UserRegistrationRequest {
     private String birth_father;
     private String death_dateOfDeath;
     private String death_placeOfDeath;
+
 }
 

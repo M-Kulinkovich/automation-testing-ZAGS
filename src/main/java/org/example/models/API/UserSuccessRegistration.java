@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserSuccessRegistration {
-    private Integer applicantid;
     private Integer applicationid;
+    private Integer applicantid;
     private Integer citizenid;
+    private Integer birthcertificateid;
     private Integer merrigecertificateid;
+    private Integer deathcertificateid;
 }

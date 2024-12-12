@@ -1,7 +1,6 @@
 package Web;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
 import org.example.dataProviders.WEB.RegistrationAdminDataProvider;
 import org.example.pages.AdminDataFormPage;
 import org.example.pages.RoleSelectPage;
@@ -37,5 +36,4 @@ public class AdminDataFormTest extends BaseTest {
         Assert.assertTrue(resultOfSendingText.contains("Aдминистратор"), FORM_NOT_SUBMITTED_MESSAGE);
 
     }
-
 }

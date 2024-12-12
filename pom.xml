@@ -23,6 +23,7 @@
         <rest-assured.version>5.5.0</rest-assured.version>
         <maven-compiler.version>3.1.0</maven-compiler.version>
         <jackson-databind.version>2.18.2</jackson-databind.version>
+        <postgresql_jdbc.version>42.7.4</postgresql_jdbc.version>
     </properties>
 
     <dependencies>
@@ -74,6 +75,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-databind.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql_jdbc.version}</version>
+        </dependency>
+
 
     </dependencies>
 
