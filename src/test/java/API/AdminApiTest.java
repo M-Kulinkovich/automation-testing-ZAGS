@@ -2,6 +2,7 @@ package API;
 
 import io.qameta.allure.Description;
 import io.restassured.response.ValidatableResponse;
+import org.example.config.CleanUpDataBase;
 import org.example.dataProviders.API.AdminRegistrationProvider;
 import org.example.dataProviders.API.RequestChangeStatusProvider;
 import org.example.models.API.*;
@@ -52,6 +53,9 @@ public class AdminApiTest extends BaseTest {
                 "Phone number mismatch");
         softAssert.assertAll();
 
+        //deleting admin test data
+        CleanUpDataBase.deleteAdminDBTestData(adminSuccessRegistration.getStaffid());
+        APIlogger.info("delete test data from DB using StaffId:" + adminSuccessRegistration.getStaffid());
     }
 
     @Test
