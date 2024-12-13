@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeClass;
 @Epic ("API tests")
 public abstract class BaseTest {
     protected static final Logger APIlogger = LogManager.getLogger(Web.BaseTest.class);
+
     @BeforeClass
     public void setup() {
         Specifications.installSpecification(Specifications.requestSpec(), Specifications.responseSpecOK200());

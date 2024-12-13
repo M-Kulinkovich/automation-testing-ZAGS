@@ -7,6 +7,7 @@ import org.example.dataProviders.API.RequestChangeStatusProvider;
 import org.example.models.API.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 
 import static io.restassured.RestAssured.given;
@@ -38,16 +39,18 @@ public class AdminApiTest extends BaseTest {
         //check creation admin in DB
         AdminRegistrationRequest actualAdmin = checkCreatingAdminInDB(adminSuccessRegistration.getStaffid());
         APIlogger.info("comparison data sent to API and database");
-        Assert.assertEquals(actualAdmin.getPersonalFirstName(), testAdmin.getPersonalFirstName()
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAdmin.getPersonalFirstName(), testAdmin.getPersonalFirstName()
                 , "First name mismatch");
-        Assert.assertEquals(actualAdmin.getPersonalLastName(), testAdmin.getPersonalLastName(),
+        softAssert.assertEquals(actualAdmin.getPersonalLastName(), testAdmin.getPersonalLastName(),
                 "Last name mismatch");
-        Assert.assertEquals(actualAdmin.getPersonalMiddleName(), testAdmin.getPersonalMiddleName(),
+        softAssert.assertEquals(actualAdmin.getPersonalMiddleName(), testAdmin.getPersonalMiddleName(),
                 "Middle name mismatch");
-        Assert.assertEquals(actualAdmin.getPersonalNumberOfPassport(), testAdmin.getPersonalNumberOfPassport(),
+        softAssert.assertEquals(actualAdmin.getPersonalNumberOfPassport(), testAdmin.getPersonalNumberOfPassport(),
                 "Passport number mismatch");
-        Assert.assertEquals(actualAdmin.getPersonalPhoneNumber(), testAdmin.getPersonalPhoneNumber(),
+        softAssert.assertEquals(actualAdmin.getPersonalPhoneNumber(), testAdmin.getPersonalPhoneNumber(),
                 "Phone number mismatch");
+        softAssert.assertAll();
 
     }
 

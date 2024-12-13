@@ -7,6 +7,7 @@ import org.example.models.API.UserRegistrationRequest;
 import org.example.models.API.UserSuccessRegistration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import static io.restassured.RestAssured.given;
 import static org.example.utils.UserDBUtils.UserDBUtils.*;
@@ -45,35 +46,35 @@ public class UserApiTest extends BaseTest {
         UserRegistrationRequest actualUser = checkCreatingUserWithBirthServiceInDB(userSuccessRegistration.getBirthcertificateid());
         APIlogger.info("comparison data sent birthday certificate to API and database");
 
-        Assert.assertEquals(actualUser.getPersonalFirstName(), testUser.getPersonalFirstName(),
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualUser.getPersonalFirstName(), testUser.getPersonalFirstName(),
                 "First name mismatch");
-        Assert.assertEquals(actualUser.getPersonalLastName(), testUser.getPersonalLastName(),
+        softAssert.assertEquals(actualUser.getPersonalLastName(), testUser.getPersonalLastName(),
                 "Last name mismatch");
-        Assert.assertEquals(actualUser.getPersonalMiddleName(), testUser.getPersonalMiddleName(),
+        softAssert.assertEquals(actualUser.getPersonalMiddleName(), testUser.getPersonalMiddleName(),
                 "Middle name mismatch");
-        Assert.assertEquals(actualUser.getPersonalNumberOfPassport(), testUser.getPersonalNumberOfPassport(),
+        softAssert.assertEquals(actualUser.getPersonalNumberOfPassport(), testUser.getPersonalNumberOfPassport(),
                 "Passport number mismatch");
-        Assert.assertEquals(actualUser.getPersonalPhoneNumber(), testUser.getPersonalPhoneNumber(),
+        softAssert.assertEquals(actualUser.getPersonalPhoneNumber(), testUser.getPersonalPhoneNumber(),
                 "Phone number mismatch");
-        Assert.assertEquals(actualUser.getCitizenGender(), testUser.getCitizenGender(),
+        softAssert.assertEquals(actualUser.getCitizenGender(), testUser.getCitizenGender(),
                 "Citizen gender mismatch");
-        Assert.assertEquals(actualUser.getCitizenNumberOfPassport(), testUser.getCitizenNumberOfPassport(),
+        softAssert.assertEquals(actualUser.getCitizenNumberOfPassport(), testUser.getCitizenNumberOfPassport(),
                 "Citizen passport number mismatch");
-        Assert.assertEquals(actualUser.getCitizenFirstName(), testUser.getCitizenFirstName(),
+        softAssert.assertEquals(actualUser.getCitizenFirstName(), testUser.getCitizenFirstName(),
                 "Citizen first name mismatch");
-        Assert.assertEquals(actualUser.getCitizenLastName(), testUser.getCitizenLastName(),
+        softAssert.assertEquals(actualUser.getCitizenLastName(), testUser.getCitizenLastName(),
                 "Citizen last name mismatch");
-        Assert.assertEquals(actualUser.getCitizenMiddleName(), testUser.getCitizenMiddleName(),
+        softAssert.assertEquals(actualUser.getCitizenMiddleName(), testUser.getCitizenMiddleName(),
                 "Citizen middle name mismatch");
 
-        Assert.assertEquals(actualUser.getBirth_father(), testUser.getBirth_father(),
+        softAssert.assertEquals(actualUser.getBirth_father(), testUser.getBirth_father(),
                 "Mother name mismatch");
-        Assert.assertEquals(actualUser.getBirth_mother(), testUser.getBirth_mother(),
+        softAssert.assertEquals(actualUser.getBirth_mother(), testUser.getBirth_mother(),
                 "Father name mismatch");
-        Assert.assertEquals(actualUser.getBirth_place(), testUser.getBirth_place(),
+        softAssert.assertEquals(actualUser.getBirth_place(), testUser.getBirth_place(),
                 "Place of birth mismatch");
-
-
+        softAssert.assertAll();
     }
 
     @Test
@@ -88,31 +89,34 @@ public class UserApiTest extends BaseTest {
         UserRegistrationRequest actualUser = checkCreatingUserWithDeathServiceInDB(userSuccessRegistration.getDeathcertificateid());
         APIlogger.info("comparison data sent death certificate to API and database");
 
-        Assert.assertEquals(actualUser.getPersonalFirstName(), testUser.getPersonalFirstName(),
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualUser.getPersonalFirstName(), testUser.getPersonalFirstName(),
                 "First name mismatch");
-        Assert.assertEquals(actualUser.getPersonalLastName(), testUser.getPersonalLastName(),
+        softAssert.assertEquals(actualUser.getPersonalLastName(), testUser.getPersonalLastName(),
                 "Last name mismatch");
-        Assert.assertEquals(actualUser.getPersonalMiddleName(), testUser.getPersonalMiddleName(),
+        softAssert.assertEquals(actualUser.getPersonalMiddleName(), testUser.getPersonalMiddleName(),
                 "Middle name mismatch");
-        Assert.assertEquals(actualUser.getPersonalNumberOfPassport(), testUser.getPersonalNumberOfPassport(),
+        softAssert.assertEquals(actualUser.getPersonalNumberOfPassport(), testUser.getPersonalNumberOfPassport(),
                 "Passport number mismatch");
-        Assert.assertEquals(actualUser.getPersonalPhoneNumber(), testUser.getPersonalPhoneNumber(),
+        softAssert.assertEquals(actualUser.getPersonalPhoneNumber(), testUser.getPersonalPhoneNumber(),
                 "Phone number mismatch");
-        Assert.assertEquals(actualUser.getCitizenGender(), testUser.getCitizenGender(),
+        softAssert.assertEquals(actualUser.getCitizenGender(), testUser.getCitizenGender(),
                 "Citizen gender mismatch");
-        Assert.assertEquals(actualUser.getCitizenNumberOfPassport(), testUser.getCitizenNumberOfPassport(),
+        softAssert.assertEquals(actualUser.getCitizenNumberOfPassport(), testUser.getCitizenNumberOfPassport(),
                 "Citizen passport number mismatch");
-        Assert.assertEquals(actualUser.getCitizenFirstName(), testUser.getCitizenFirstName(),
+        softAssert.assertEquals(actualUser.getCitizenFirstName(), testUser.getCitizenFirstName(),
                 "Citizen first name mismatch");
-        Assert.assertEquals(actualUser.getCitizenLastName(), testUser.getCitizenLastName(),
+        softAssert.assertEquals(actualUser.getCitizenLastName(), testUser.getCitizenLastName(),
                 "Citizen last name mismatch");
-        Assert.assertEquals(actualUser.getCitizenMiddleName(), testUser.getCitizenMiddleName(),
+        softAssert.assertEquals(actualUser.getCitizenMiddleName(), testUser.getCitizenMiddleName(),
                 "Citizen middle name mismatch");
 
-        Assert.assertEquals(actualUser.getDeath_dateOfDeath(), testUser.getDeath_dateOfDeath(),
+        softAssert.assertEquals(actualUser.getDeath_dateOfDeath(), testUser.getDeath_dateOfDeath(),
                 "Death date mismatch");
-        Assert.assertEquals(actualUser.getDeath_placeOfDeath(), testUser.getDeath_placeOfDeath(),
+        softAssert.assertEquals(actualUser.getDeath_placeOfDeath(), testUser.getDeath_placeOfDeath(),
                 "Death place mismatch");
+
+        softAssert.assertAll();
     }
 
     @Test
@@ -127,37 +131,40 @@ public class UserApiTest extends BaseTest {
         UserRegistrationRequest actualUser = checkCreatingUserWithMarriageServiceInDB(userSuccessRegistration.getMerrigecertificateid());
         APIlogger.info("comparison data sent marriage certificate to API and database");
 
-        Assert.assertEquals(actualUser.getPersonalFirstName(), testUser.getPersonalFirstName(),
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualUser.getPersonalFirstName(), testUser.getPersonalFirstName(),
                 "First name mismatch");
-        Assert.assertEquals(actualUser.getPersonalLastName(), testUser.getPersonalLastName(),
+        softAssert.assertEquals(actualUser.getPersonalLastName(), testUser.getPersonalLastName(),
                 "Last name mismatch");
-        Assert.assertEquals(actualUser.getPersonalMiddleName(), testUser.getPersonalMiddleName(),
+        softAssert.assertEquals(actualUser.getPersonalMiddleName(), testUser.getPersonalMiddleName(),
                 "Middle name mismatch");
-        Assert.assertEquals(actualUser.getPersonalNumberOfPassport(), testUser.getPersonalNumberOfPassport(),
+        softAssert.assertEquals(actualUser.getPersonalNumberOfPassport(), testUser.getPersonalNumberOfPassport(),
                 "Passport number mismatch");
-        Assert.assertEquals(actualUser.getPersonalPhoneNumber(), testUser.getPersonalPhoneNumber(),
+        softAssert.assertEquals(actualUser.getPersonalPhoneNumber(), testUser.getPersonalPhoneNumber(),
                 "Phone number mismatch");
-        Assert.assertEquals(actualUser.getCitizenGender(), testUser.getCitizenGender(),
+        softAssert.assertEquals(actualUser.getCitizenGender(), testUser.getCitizenGender(),
                 "Citizen gender mismatch");
-        Assert.assertEquals(actualUser.getCitizenNumberOfPassport(), testUser.getCitizenNumberOfPassport(),
+        softAssert.assertEquals(actualUser.getCitizenNumberOfPassport(), testUser.getCitizenNumberOfPassport(),
                 "Citizen passport number mismatch");
-        Assert.assertEquals(actualUser.getCitizenFirstName(), testUser.getCitizenFirstName(),
+        softAssert.assertEquals(actualUser.getCitizenFirstName(), testUser.getCitizenFirstName(),
                 "Citizen first name  mismatch");
-        Assert.assertEquals(actualUser.getCitizenLastName(), testUser.getCitizenLastName(),
+        softAssert.assertEquals(actualUser.getCitizenLastName(), testUser.getCitizenLastName(),
                 "Citizen last name  mismatch");
-        Assert.assertEquals(actualUser.getCitizenMiddleName(), testUser.getCitizenMiddleName(),
+        softAssert.assertEquals(actualUser.getCitizenMiddleName(), testUser.getCitizenMiddleName(),
                 "Citizen middle name  mismatch");
 
-        Assert.assertEquals(actualUser.getAnotherPersonLastName(), testUser.getAnotherPersonLastName(),
+        softAssert.assertEquals(actualUser.getAnotherPersonLastName(), testUser.getAnotherPersonLastName(),
                 "Last name of spouse mismatch");
-        Assert.assertEquals(actualUser.getAnotherPersonFirstName(), testUser.getAnotherPersonFirstName(),
+        softAssert.assertEquals(actualUser.getAnotherPersonFirstName(), testUser.getAnotherPersonFirstName(),
                 "First name of spouse mismatch");
-        Assert.assertEquals(actualUser.getAnotherPersonMiddleName(), testUser.getAnotherPersonMiddleName(),
+        softAssert.assertEquals(actualUser.getAnotherPersonMiddleName(), testUser.getAnotherPersonMiddleName(),
                 "Middle name of spouse mismatch");
-        Assert.assertEquals(actualUser.getAnotherPersonPassport(), testUser.getAnotherPersonPassport(),
+        softAssert.assertEquals(actualUser.getAnotherPersonPassport(), testUser.getAnotherPersonPassport(),
                 "Passport of spouse mismatch");
-        Assert.assertEquals(actualUser.getNewLastName(), testUser.getNewLastName(),
+        softAssert.assertEquals(actualUser.getNewLastName(), testUser.getNewLastName(),
                 "New last name mismatch");
+
+        softAssert.assertAll();
     }
 }
 
