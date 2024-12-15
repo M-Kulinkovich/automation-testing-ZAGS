@@ -13,7 +13,7 @@ public class AfterStep {
     @After
     public void tearDown() {
         quitDriver();
-        logger.info("Cucumber test completed \n --------------------------------------------------------------------");
+        logger.info("Cucumber test completed \n ------------------------------------------------------------------");
     }
 
 }
