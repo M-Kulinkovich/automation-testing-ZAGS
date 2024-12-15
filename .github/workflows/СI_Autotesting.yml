@@ -54,9 +54,7 @@ jobs:
         run: |
           cd target/site/allure-maven-plugin
           zip -r allure-report.zip .
-          mv allure-report.zip ../../../../../allure-report.zip
-          ls -la target/
-          continue-on-error: true
+          ls -la target/site/allure-maven-plugin
 
       - name: List directory contents
         run: ls -la
@@ -71,4 +69,4 @@ jobs:
           to: kulinkovich.maksim@gmail.com
           from: "Test Reports <${{ secrets.EMAIL }}>"
           body: "Allure report in attachment"
-          attachments: allure-report.zip
+          attachments: target/site/allure-report.zip
