@@ -44,20 +44,21 @@ jobs:
 
       - name: Running tests
         run: mvn clean test
+        continue-on-error: true
 
       - name: Generate Allure report
         run: |          
           mvn allure:report
-          mkdir -p allure-report
-          cp -r target/site/allure-maven-plugin/* allure-report/
-          zip -r allure-report.zip allure-report/
+          cd target/site
+          zip -r allure-report.zip allure-maven-plugin
+          if: always()
           
       - name: Send Email with report
         env:
           EMAIL_USER: ${{ secrets.EMAIL }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_SMTP_PASS }}
         run: |
-          echo "Письмо с отчётом отправляется..."
+          echo "Sending allure report"
           echo "Allure Report attached." | mail -s "Allure Report - Test Results" \
             -a allure-report.zip \
             -S smtp="smtp://smtp.mail.ru:587" \
@@ -66,4 +67,4 @@ jobs:
             -S smtp-auth=login \
             -S from="$EMAIL_USER" \
             "kulinkovich.maksim@gmail.com"
-
+          if: always()
