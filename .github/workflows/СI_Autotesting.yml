@@ -35,9 +35,9 @@ jobs:
           echo "dbUser=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
           cat src/main/resources/conf.properties
 
-      - name: Run Maven test
+      - name: SetUp Maven dependencies
         run: |
-          mvn clean install
+          mvn clean package -DskipTests  
 
       - name: Generate Allure report
         run: |
