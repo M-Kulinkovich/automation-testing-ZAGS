@@ -2,6 +2,8 @@
 name: Java CI Autotesting
 
 on:
+  schedule: 
+    - cron: "0 9 * * *" # Запуск каждый день в 9 утра
   push:
     branches:
       - "Task_6_Cucumber/Gherkin_CI"
@@ -36,10 +38,27 @@ jobs:
           cat src/main/resources/conf.properties
 
       - name: SetUp Maven dependencies
-        run: |
-          mvn clean test
+        run: mvn clean test
 
       - name: Generate Allure report
-        run: |
+        run: |          
           mvn allure:report
+          mkdir -p allure-report
+          cp -r target/site/allure-maven-plugin/* allure-report/
+          zip -r allure-report.zip allure-report/
+          
+      - name: Send Email with report
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_SMTP_PASS }}
+        run: |
+          echo "Письмо с отчётом отправляется..."
+          echo "Allure Report attached." | mail -s "Allure Report - Test Results" \
+            -a allure-report.zip \
+            -S smtp="smtp://smtp.mail.ru:587" \
+            -S smtp-auth-user="$EMAIL_USER" \
+            -S smtp-auth-password="$EMAIL_PASSWORD" \
+            -S smtp-auth=login \
+            -S from="$EMAIL_USER" \
+            "kulinkovich.maksim@gmail.com"
 
