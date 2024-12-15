@@ -56,6 +56,9 @@ jobs:
           zip -r allure-report.zip .
           mv allure-report.zip ../../../../allure-report.zip
 
+      - name: Install mailx
+        run: sudo apt-get install -y mailx
+        
       - name: Send Email with report
         run: |
           echo "Sending test report to email"
