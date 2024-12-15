@@ -7,20 +7,20 @@
             <class name="API.ApplicationApiTest"/>
         </classes>
     </test>
-<!--    <test name="Web tests">-->
-<!--        <listeners>-->
-<!--            <listener class-name="testUtils.TestListener"/>-->
-<!--        </listeners>-->
-<!--        <classes>-->
-<!--            <class name="Web.BaseTest"/>-->
-<!--            <class name="Web.UserDataFormTest"/>-->
-<!--            <class name="Web.AdminDataFormTest"/>-->
-<!--            <class name="Web.AdminTableTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Cucumber test">-->
-<!--        <classes>-->
-<!--            <class name="Cucumber.TestRunner"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Web tests">
+        <listeners>
+            <listener class-name="testUtils.TestListener"/>
+        </listeners>
+        <classes>
+            <class name="Web.BaseTest"/>
+            <class name="Web.UserDataFormTest"/>
+            <class name="Web.AdminDataFormTest"/>
+            <class name="Web.AdminTableTest"/>
+        </classes>
+    </test>
+    <test name="Cucumber test">
+        <classes>
+            <class name="Cucumber.TestRunner"/>
+        </classes>
+    </test>
 </suite>

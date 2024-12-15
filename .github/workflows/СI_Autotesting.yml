@@ -39,9 +39,6 @@ jobs:
         run: |
           mvn clean install
 
-      - name: Run tests with TestNG
-        run: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
-
       - name: Generate Allure report
         run: |
           mvn allure:report
