@@ -25,15 +25,15 @@ jobs:
 
       - name: Create conf.properties from GitHub secrets
         run: |
-          touch conf.properties
-          echo "BASE_URL=${{ secrets.BASE_URL }}" > $conf.properties
-          echo "DBHOST=${{ secrets.DBHOST }}" > $conf.properties
-          echo "DBNAME=${{ secrets.DBNAME }}" > $conf.properties
-          echo "DBPASS=${{ secrets.DBPASS }}" > $conf.properties
-          echo "DBPORT=${{ secrets.DBPORT }}" > $conf.properties
-          echo "DBSCHEMA=${{ secrets.DBSCHEMA }}" > $conf.properties
-          echo "DBUSER=${{ secrets.DBUSER }}" > $conf.properties
-          cat conf.properties 
+          mkdir -p src/main/resources
+          echo "BASE_URL=${{ secrets.BASE_URL }}" > src/main/resources/conf.properties
+          echo "DBHOST=${{ secrets.DBHOST }}" >> src/main/resources/conf.properties
+          echo "DBNAME=${{ secrets.DBNAME }}" >> src/main/resources/conf.properties
+          echo "DBPASS=${{ secrets.DBPASS }}" >> src/main/resources/conf.properties
+          echo "DBPORT=${{ secrets.DBPORT }}" >> src/main/resources/conf.properties
+          echo "DBSCHEMA=${{ secrets.DBSCHEMA }}" >> src/main/resources/conf.properties
+          echo "DBUSER=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
+          cat src/main/resources/conf.properties
 
       - name: Build with Maven
         run: |
