@@ -2,6 +2,8 @@
 name: Java CI Autotesting
 
 on:
+  schedule: 
+    - cron: "0 9 * * *" # Запуск каждый день в 9 утра
   push:
     branches:
       - "Task_6_Cucumber/Gherkin_CI"
@@ -22,8 +24,13 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          
+      - name: Install Google Chrome
+        run: |
+              sudo apt-get update
+              sudo apt-get install -y google-chrome-stable
 
-      - name: Create conf.properties from GitHub secrets
+      - name: Create conf.properties
         run: |
           mkdir -p src/main/resources
           echo "BASE_URL=${{ secrets.BASE_URL }}" > src/main/resources/conf.properties
@@ -35,11 +42,28 @@ jobs:
           echo "dbUser=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
           cat src/main/resources/conf.properties
 
-      - name: SetUp Maven dependencies
-        run: |
-          mvn clean package -DskipTests  
+      - name: Running tests
+        run: mvn clean test
 
       - name: Generate Allure report
-        run: |
+        run: |          
           mvn allure:report
+          mkdir -p allure-report
+          cp -r target/site/allure-maven-plugin/* allure-report/
+          zip -r allure-report.zip allure-report/
+          
+      - name: Send Email with report
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_SMTP_PASS }}
+        run: |
+          echo "Письмо с отчётом отправляется..."
+          echo "Allure Report attached." | mail -s "Allure Report - Test Results" \
+            -a allure-report.zip \
+            -S smtp="smtp://smtp.mail.ru:587" \
+            -S smtp-auth-user="$EMAIL_USER" \
+            -S smtp-auth-password="$EMAIL_PASSWORD" \
+            -S smtp-auth=login \
+            -S from="$EMAIL_USER" \
+            "kulinkovich.maksim@gmail.com"
 
