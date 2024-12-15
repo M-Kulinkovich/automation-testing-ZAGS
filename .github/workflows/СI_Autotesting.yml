@@ -3,7 +3,7 @@ name: Java CI Autotesting
 
 on:
   push:
-    branches: [ "Task_6_Cucumber/Gherkin_CI" ]
+    branches: "*"
   pull_request:
     branches: [ "main" ] 
 
