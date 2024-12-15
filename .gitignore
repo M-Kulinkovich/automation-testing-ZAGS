@@ -35,3 +35,7 @@ build/
 !**/src/test/**/build/
 
 
+/allure-results/
+/.allure/
+/src/main/resources/conf.properties
+/logs/
