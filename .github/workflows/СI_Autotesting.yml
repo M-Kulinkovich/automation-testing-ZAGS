@@ -27,12 +27,12 @@ jobs:
         run: |
           mkdir -p src/main/resources
           echo "BASE_URL=${{ secrets.BASE_URL }}" > src/main/resources/conf.properties
-          echo "DBHOST=${{ secrets.DBHOST }}" >> src/main/resources/conf.properties
-          echo "DBNAME=${{ secrets.DBNAME }}" >> src/main/resources/conf.properties
-          echo "DBPASS=${{ secrets.DBPASS }}" >> src/main/resources/conf.properties
-          echo "DBPORT=${{ secrets.DBPORT }}" >> src/main/resources/conf.properties
-          echo "DBSCHEMA=${{ secrets.DBSCHEMA }}" >> src/main/resources/conf.properties
-          echo "DBUSER=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
+          echo "dbHost=${{ secrets.DBHOST }}" >> src/main/resources/conf.properties
+          echo "dbName=${{ secrets.DBNAME }}" >> src/main/resources/conf.properties
+          echo "dbPass=${{ secrets.DBPASS }}" >> src/main/resources/conf.properties
+          echo "dbPort=${{ secrets.DBPORT }}" >> src/main/resources/conf.properties
+          echo "dbSchema=${{ secrets.DBSCHEMA }}" >> src/main/resources/conf.properties
+          echo "dbUser=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
           cat src/main/resources/conf.properties
 
       - name: Run Maven test
