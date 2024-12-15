@@ -55,9 +55,8 @@ jobs:
           cd target/site/allure-maven-plugin
           zip -r allure-report.zip .
           mv allure-report.zip ../../../../../allure-report.zip
-          ls -la allure-report.zip
-          echo("----------2n")
           ls -la target/
+          continue-on-error: true
 
       - name: List directory contents
         run: ls -la
