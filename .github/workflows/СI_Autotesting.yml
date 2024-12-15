@@ -49,22 +49,4 @@ jobs:
       - name: Generate Allure report
         run: |          
           mvn allure:report
-          cd target/site
-          zip -r allure-report.zip allure-maven-plugin
-          if: always()
-          
-      - name: Send Email with report
-        env:
-          EMAIL_USER: ${{ secrets.EMAIL }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_SMTP_PASS }}
-        run: |
-          echo "Sending allure report"
-          echo "Allure Report attached." | mail -s "Allure Report - Test Results" \
-            -a allure-report.zip \
-            -S smtp="smtp://smtp.mail.ru:587" \
-            -S smtp-auth-user="$EMAIL_USER" \
-            -S smtp-auth-password="$EMAIL_PASSWORD" \
-            -S smtp-auth=login \
-            -S from="$EMAIL_USER" \
-            "kulinkovich.maksim@gmail.com"
-          if: always()
+      
