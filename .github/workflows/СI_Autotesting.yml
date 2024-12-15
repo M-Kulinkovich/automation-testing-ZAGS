@@ -24,8 +24,13 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          
+      - name: Install Google Chrome
+        run: |
+              sudo apt-get update
+              sudo apt-get install -y google-chrome-stable
 
-      - name: Create conf.properties from GitHub secrets
+      - name: Create conf.properties
         run: |
           mkdir -p src/main/resources
           echo "BASE_URL=${{ secrets.BASE_URL }}" > src/main/resources/conf.properties
@@ -37,7 +42,7 @@ jobs:
           echo "dbUser=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
           cat src/main/resources/conf.properties
 
-      - name: SetUp Maven dependencies
+      - name: Running tests
         run: mvn clean test
 
       - name: Generate Allure report
