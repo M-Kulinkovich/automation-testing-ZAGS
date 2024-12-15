@@ -3,7 +3,7 @@ name: Autotesting
 on:
   push:
     branches:
-      - 'Task/*'   # Запускать CI для всех веток, начинающихся с "feature/"
+      - 'Task/*' 
       
 jobs:
   build:
