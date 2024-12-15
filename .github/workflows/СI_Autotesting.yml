@@ -37,7 +37,7 @@ jobs:
 
       - name: SetUp Maven dependencies
         run: |
-          mvn clean package -DskipTests  
+          mvn clean test
 
       - name: Generate Allure report
         run: |
