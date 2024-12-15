@@ -18,4 +18,9 @@
             <class name="Web.AdminTableTest"/>
         </classes>
     </test>
+    <test name="Cucumber test">
+        <classes>
+            <class name="Cucumber.TestRunner"/>
+        </classes>
+    </test>
 </suite>
