@@ -56,6 +56,9 @@ jobs:
           zip -r allure-report.zip .
           mv allure-report.zip ../../../../allure-report.zip
 
+      - name: List directory contents
+        run: ls -la
+      
       - name: Send Email with report
         uses: dawidd6/action-send-mail@v4
         with:
@@ -64,4 +67,4 @@ jobs:
           to: kulinkovich.maksim@gmail.com
           from: "Test Reports <${{ secrets.EMAIL }}>"
           body: "Allure report in attachment"
-          attachments: allure-report.zip
+          attachments: target/site/allure-maven-plugin/allure-report.zip
