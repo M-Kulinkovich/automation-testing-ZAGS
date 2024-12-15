@@ -1,3 +1,4 @@
+
 name: Java CI Autotesting
 
 on:
@@ -24,6 +25,7 @@ jobs:
 
       - name: Create conf.properties from GitHub secrets
         run: |
+          touch conf.properties
           echo "BASE_URL=${{ secrets.BASE_URL }}" > $conf.properties
           echo "DBHOST=${{ secrets.DBHOST }}" > $conf.properties
           echo "DBNAME=${{ secrets.DBNAME }}" > $conf.properties
