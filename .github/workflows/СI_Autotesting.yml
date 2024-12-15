@@ -55,9 +55,14 @@ jobs:
           cd target/site/allure-maven-plugin
           zip -r allure-report.zip .
           mv allure-report.zip ../../../../../allure-report.zip
+          ls -la allure-report.zip
+          echo("----------2n")
+          ls -la target/
 
       - name: List directory contents
         run: ls -la
+      - name: List target directory contents
+        run: ls -la target/site/allure-maven-plugin
       
       - name: Send Email with report
         uses: dawidd6/action-send-mail@v4
