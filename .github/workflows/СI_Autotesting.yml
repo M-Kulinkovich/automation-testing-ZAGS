@@ -56,15 +56,12 @@ jobs:
           zip -r allure-report.zip .
           mv allure-report.zip ../../../../allure-report.zip
 
-      - name: Install mailx
-        run: sudo apt-get install -y mailx
-        
       - name: Send Email with report
-        run: |
-          echo "Sending test report to email"
-          echo "See attached Allure Report" | mail -s "Test Report" -A "allure-report.zip" -S smtp="smtp.mail.ru" -S smtp-auth-user="${{ secrets.SMTP_USER }}" -S smtp-auth-password="${{ secrets.SMTP_PASS }}" -S smtp-use-starttls kulinkovich.maksim@gmail.com
-        env:
-          SMTP_SERVER: smtp.mail.ru
-          SMTP_PORT: 587
-          SMTP_USER: ${{ secrets.EMAIL }}
-          SMTP_PASS: ${{ secrets.EMAIL_SMTP_PASS }}
+        uses: dawidd6/action-send-mail@v4
+        with:
+          connection_url: smtp://${{ secrets.EMAIL }}:${{ secrets.EMAIL_SMTP_PASS }}@smtp.mail.ru:587
+          subject: "Test Report"
+          to: kulinkovich.maksim@gmail.com
+          from: "Test Reports <${{ secrets.EMAIL }}>"
+          body: "Allure report in attachment"
+          attachments: allure-report.zip
