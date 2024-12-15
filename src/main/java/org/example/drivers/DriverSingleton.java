@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.pages.AdminDataFormPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverSingleton {
     private static WebDriver driver;
@@ -17,7 +18,12 @@ public class DriverSingleton {
 
         if (driver == null) {
             logger.info("Initialization WebDriver");
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--remote-allow-origins=*");
+            driver = new ChromeDriver(options);
         }
         return driver;
     }
