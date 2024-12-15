@@ -22,15 +22,21 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Set up secret variables
+      - name: Create conf.properties from GitHub secrets
         run: |
-          echo "DB_URL=${{ secrets.BASE_URL }}" >> $conf.properties
-          echo "DB_USER=${{ secrets.DBHOST }}" >> $conf.properties
-          echo "DB_PASSWORD=${{ secrets.DBNAME }}" >> $conf.properties
-          echo "DB_PASSWORD=${{ secrets.DBPASS }}" >> $conf.properties
-          echo "DB_PASSWORD=${{ secrets.DBPORT }}" >> $conf.properties
-          echo "DB_PASSWORD=${{ secrets.DBSCHEMA }}" >> $conf.properties
-          echo "DB_PASSWORD=${{ secrets.DBUSER }}" >> $conf.properties
+          echo "BASE_URL=${{ secrets.BASE_URL }}" > $conf.properties
+          echo "DBHOST=${{ secrets.DBHOST }}" > $conf.properties
+          echo "DBNAME=${{ secrets.DBNAME }}" > $conf.properties
+          echo "DBPASS=${{ secrets.DBPASS }}" > $conf.properties
+          echo "DBPORT=${{ secrets.DBPORT }}" > $conf.properties
+          echo "DBSCHEMA=${{ secrets.DBSCHEMA }}" > $conf.properties
+          echo "DBUSER=${{ secrets.DBUSER }}" > $conf.properties
+          cat conf.properties 
 
       - name: Build with Maven
-        run: mvn clean test
+        run: |
+          mvn clean test
+
+      - name: Generate Allure report
+        run: |
+          mvn allure:report
