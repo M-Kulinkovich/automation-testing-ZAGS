@@ -3,14 +3,16 @@ name: Java CI Autotesting
 
 on:
   push:
-    branches: "*"
+    branches:
+      - "Task_6_Cucumber/Gherkin_CI"
   pull_request:
-    branches: [ "main" ] 
+    branches:
+      - "main"
 
 jobs:
   build:
-    runs-on: windows-latest
-    
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -21,5 +23,26 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Build with Maven
-        run: mvn clean test
+      - name: Create conf.properties from GitHub secrets
+        run: |
+          mkdir -p src/main/resources
+          echo "BASE_URL=${{ secrets.BASE_URL }}" > src/main/resources/conf.properties
+          echo "dbHost=${{ secrets.DBHOST }}" >> src/main/resources/conf.properties
+          echo "dbName=${{ secrets.DBNAME }}" >> src/main/resources/conf.properties
+          echo "dbPass=${{ secrets.DBPASS }}" >> src/main/resources/conf.properties
+          echo "dbPort=${{ secrets.DBPORT }}" >> src/main/resources/conf.properties
+          echo "dbSchema=${{ secrets.DBSCHEMA }}" >> src/main/resources/conf.properties
+          echo "dbUser=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
+          cat src/main/resources/conf.properties
+
+      - name: Run Maven test
+        run: |
+          mvn clean install
+
+      - name: Run tests with TestNG
+        run: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+
+      - name: Generate Allure report
+        run: |
+          mvn allure:report
+
