@@ -1,16 +1,17 @@
-
 name: Java CI Autotesting
 
 on:
   push:
-    branches: "*"
+    branches:
+      - "Task_6_Cucumber/Gherkin_CI"
   pull_request:
-    branches: "main"
+    branches:
+      - "main"
 
 jobs:
   build:
-    runs-on: windows-latest
-    
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
