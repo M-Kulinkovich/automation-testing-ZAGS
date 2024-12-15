@@ -35,7 +35,7 @@ jobs:
           echo "DBUSER=${{ secrets.DBUSER }}" >> src/main/resources/conf.properties
           cat src/main/resources/conf.properties
 
-      - name: Build with Maven
+      - name: Run Maven test
         run: |
           mvn clean test
 
