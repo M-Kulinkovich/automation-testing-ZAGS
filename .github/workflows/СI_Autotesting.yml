@@ -60,7 +60,7 @@ jobs:
         with:
           connection_url: smtp://${{ secrets.EMAIL }}:${{ secrets.EMAIL_SMTP_PASS }}@smtp.mail.ru:587
           subject: "Test Report"
-          to: kulinkovich.maksim@gmail.com
+          to: ${{ secrets.EMAIL }}
           from: "Test Reports <${{ secrets.EMAIL }}>"
           body: "Allure report in attachment"
           attachments: target/site/allure-maven-plugin/allure-report.zip
