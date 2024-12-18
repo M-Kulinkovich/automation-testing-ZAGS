@@ -1,0 +1,30 @@
+
+services:
+  selenoid:
+    image: "aerokube/selenoid"
+    network_mode: bridge
+    ports:
+      - "4444:4444"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./browser.json:/etc/selenoid/browsers.json"
+
+  selenoid-ui:
+    image: "aerokube/selenoid-ui"
+    network_mode: bridge
+    links:
+      - selenoid
+    ports:
+      - "8080:8080"
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+
+  tests:
+    build:
+      context: .
+    container_name: maven-tests
+    depends_on:
+      - selenoid
+    environment:
+      - SELENOID_URL=http://selenoid:4444
+    volumes:
+      - .:/app

@@ -26,6 +26,7 @@
         <postgresql_jdbc.version>42.7.4</postgresql_jdbc.version>
         <cucumber.version>7.20.1</cucumber.version>
         <selenide.version>7.6.1</selenide.version>
+        <selenium_opera.version>4.4.0</selenium_opera.version>
     </properties>
 
     <dependencies>
@@ -97,6 +98,12 @@
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-opera-driver</artifactId>
+            <version>${selenium_opera.version}</version>
+        </dependency>
+
 
 
     </dependencies>
@@ -133,6 +140,9 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>./testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
@@ -149,7 +159,19 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>

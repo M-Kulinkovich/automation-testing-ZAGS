@@ -1,25 +1,45 @@
-<suite name="Test Suite">
-    <test name="API tests">
+<suite name="ParallelTests" parallel="tests" thread-count="5">
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="API.BaseTest"/>
             <class name="API.UserApiTest"/>
             <class name="API.AdminApiTest"/>
             <class name="API.ApplicationApiTest"/>
-        </classes>
-    </test>
-    <test name="Web tests">
-        <listeners>
-            <listener class-name="testUtils.TestListener"/>
-        </listeners>
-        <classes>
             <class name="Web.BaseTest"/>
             <class name="Web.UserDataFormTest"/>
             <class name="Web.AdminDataFormTest"/>
             <class name="Web.AdminTableTest"/>
+            <class name="Cucumber.TestRunner"/>
         </classes>
     </test>
-    <test name="Cucumber test">
+
+    <test name="FirefoxTest">
+        <parameter name="browser" value="firefox"/>
         <classes>
+            <class name="API.BaseTest"/>
+            <class name="API.UserApiTest"/>
+            <class name="API.AdminApiTest"/>
+            <class name="API.ApplicationApiTest"/>
+            <class name="Web.BaseTest"/>
+            <class name="Web.UserDataFormTest"/>
+            <class name="Web.AdminDataFormTest"/>
+            <class name="Web.AdminTableTest"/>
+            <class name="Cucumber.TestRunner"/>
+        </classes>
+    </test>
+
+    <test name="OperaTest">
+        <parameter name="browser" value="opera"/>
+        <classes>
+            <class name="API.BaseTest"/>
+            <class name="API.UserApiTest"/>
+            <class name="API.AdminApiTest"/>
+            <class name="API.ApplicationApiTest"/>
+            <class name="Web.BaseTest"/>
+            <class name="Web.UserDataFormTest"/>
+            <class name="Web.AdminDataFormTest"/>
+            <class name="Web.AdminTableTest"/>
             <class name="Cucumber.TestRunner"/>
         </classes>
     </test>
